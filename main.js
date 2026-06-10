@@ -1,6 +1,6 @@
 // Arquivo para código javascript
 
-const API_URL = "https://SEU-PROJETO.mockapi.io/materiais";
+const API_URL = "https://mockapi.io/clone/6a29e488f59cb8f65f1db732";
 
 async function carregarMateriais() {
     try {
