@@ -1,9 +1,6 @@
 // Arquivo para código javascript
 
-window.onload = () => {
-    document.getElementById("lista-materiais").style.display = "none";
-};
-const API_URL = "https://6a29e488f59cb8f65f1db731.mockapi.io/Materiais";
+const API_URL = "https://6a29e488f59cb8f65f1db731.mockapi.io/materiais";
 
 async function carregarMateriais() {
     try {
@@ -14,18 +11,17 @@ async function carregarMateriais() {
         tbody.innerHTML = "";
 
         materiais.forEach(material => {
-            const linha = document.createElement("tr");
-
-            linha.innerHTML = `
-                <td>${material.nome}</td>
-                <td>${material.quantidade}</td>
+            tbody.innerHTML += `
+                <tr>
+                    <td>${material.nome}</td>
+                    <td>${material.quantidade}</td>
+                </tr>
             `;
-
-            tbody.appendChild(linha);
         });
 
     } catch (erro) {
-        console.error("Erro ao carregar materiais:", erro);
+        alert("Erro ao carregar materiais");
+        console.log(erro);
     }
 }
 
@@ -34,24 +30,31 @@ document.getElementById("btn-cadastrar").addEventListener("click", async () => {
     const nome = document.getElementById("input-nome").value;
     const quantidade = document.getElementById("input-quantidade").value;
 
-    if (nome === "" || quantidade === "") {
-        alert("Preencha todos os campos.");
+    if (!nome || !quantidade) {
+        alert("Preencha todos os campos");
         return;
     }
 
-    const material = {
-        nome: nome,
-        quantidade: quantidade
-    };
-
     try {
-        await fetch(API_URL, {
+
+        const resposta = await fetch(API_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(material)
+            body: JSON.stringify({
+                nome,
+                quantidade
+            })
         });
+
+        alert("Material cadastrado com sucesso!");
+
+        if (!resposta.ok) {
+            throw new Error("Erro ao cadastrar");
+        }
+
+        alert("Material cadastrado com sucesso!");
 
         document.getElementById("input-nome").value = "";
         document.getElementById("input-quantidade").value = "";
@@ -59,19 +62,12 @@ document.getElementById("btn-cadastrar").addEventListener("click", async () => {
         carregarMateriais();
 
     } catch (erro) {
-        console.error("Erro ao cadastrar material:", erro);
+        alert("Falha ao cadastrar material");
+        console.log(erro);
     }
 });
 
-window.onload = carregarMateriais;
-
 document.getElementById("btn-mostrar").addEventListener("click", () => {
-    const tabela = document.getElementById("lista-materiais");
-
-    if (tabela.style.display === "none") {
-        tabela.style.display = "table";
-        carregarMateriais();
-    } else {
-        tabela.style.display = "none";
-    }
+    document.getElementById("lista-materiais").style.display = "table";
+    carregarMateriais();
 });
