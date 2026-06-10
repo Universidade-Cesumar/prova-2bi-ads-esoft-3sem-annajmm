@@ -17,17 +17,7 @@
                 id="input-nome"
                 placeholder="Nome do material"
             >
-<button id="btn-mostrar">Ver Materiais</button>
 
-<table id="lista-materiais" style="display: none;">
-    <thead>
-        <tr>
-            <th>Material</th>
-            <th>Quantidade</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
             <input
                 type="number"
                 id="input-quantidade"
@@ -39,16 +29,20 @@
             </button>
         </div>
 
-        <table id="lista-materiais">
+        <button id="btn-mostrar">
+            Ver Materiais
+        </button>
+
+        <table id="lista-materiais" style="display: none;">
             <thead>
                 <tr>
                     <th>Material</th>
                     <th>Quantidade</th>
                 </tr>
             </thead>
-            <tbody>
-            </tbody>
+            <tbody></tbody>
         </table>
+
     </div>
 
     <script src="script.js"></script>

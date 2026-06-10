@@ -1,6 +1,9 @@
 // Arquivo para código javascript
 
-const API_URL = "https://mockapi.io/clone/6a29e488f59cb8f65f1db732";
+window.onload = () => {
+    document.getElementById("lista-materiais").style.display = "none";
+};
+const API_URL = "https://6a29e488f59cb8f65f1db731.mockapi.io/Materiais";
 
 async function carregarMateriais() {
     try {
@@ -61,3 +64,14 @@ document.getElementById("btn-cadastrar").addEventListener("click", async () => {
 });
 
 window.onload = carregarMateriais;
+
+document.getElementById("btn-mostrar").addEventListener("click", () => {
+    const tabela = document.getElementById("lista-materiais");
+
+    if (tabela.style.display === "none") {
+        tabela.style.display = "table";
+        carregarMateriais();
+    } else {
+        tabela.style.display = "none";
+    }
+});
