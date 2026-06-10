@@ -48,13 +48,11 @@ document.getElementById("btn-cadastrar").addEventListener("click", async () => {
             })
         });
 
-        alert("Material cadastrado com sucesso!");
+        document.getElementById("modal-sucesso").style.display = "flex";
 
         if (!resposta.ok) {
             throw new Error("Erro ao cadastrar");
         }
-
-        alert("Material cadastrado com sucesso!");
 
         document.getElementById("input-nome").value = "";
         document.getElementById("input-quantidade").value = "";
@@ -70,4 +68,8 @@ document.getElementById("btn-cadastrar").addEventListener("click", async () => {
 document.getElementById("btn-mostrar").addEventListener("click", () => {
     document.getElementById("lista-materiais").style.display = "table";
     carregarMateriais();
+});
+
+document.getElementById("btn-ok").addEventListener("click", () => {
+    document.getElementById("modal-sucesso").style.display = "none";
 });
